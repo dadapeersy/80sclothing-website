@@ -69,7 +69,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const filesArray = Array.from(e.target.files);
-      const validFiles: { file: File; preview: string }[] = [];
+      const validFiles: { type: 'new'; file: File; preview: string }[] = [];
       const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
       filesArray.forEach(file => {
@@ -77,6 +77,7 @@ export default function ProductForm({ productId }: { productId?: string }) {
           alert(`File "${file.name}" is too large. Maximum size is 5MB.`);
         } else {
           validFiles.push({
+            type: 'new',
             file,
             preview: URL.createObjectURL(file)
           });

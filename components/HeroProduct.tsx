@@ -23,7 +23,7 @@ export default function HeroProduct({ product }: { product: any }) {
               transition={{ duration: 0.6 }}
               className="flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible snap-x snap-mandatory lg:snap-none scrollbar-hide gap-4 lg:gap-6 w-full"
             >
-              {product.images.map((img, i) => (
+              {product.images.map((img: any, i: number) => (
                 <div
                   key={i}
                   className="relative flex-shrink-0 w-full lg:w-[80%] mx-auto aspect-[3/4] lg:aspect-[4/5] snap-center lg:snap-align-none bg-gray-100 rounded-md overflow-hidden"
@@ -76,7 +76,7 @@ export default function HeroProduct({ product }: { product: any }) {
                     <span className="text-xs font-semibold tracking-wide">SIZE</span>
                   </div>
                   <div className="grid grid-cols-5 gap-2">
-                    {product.sizes.map((size) => (
+                    {product.sizes.map((size: string) => (
                       <button
                         key={size}
                         onClick={() => setSelectedSize(size)}

@@ -2,13 +2,14 @@ import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongoose';
 import { Order } from '@/lib/models';
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const resolvedParams = await params;
     const body = await request.json();
     await connectToDatabase();
     
     const updatedOrder = await Order.findByIdAndUpdate(
-      params.id,
+      resolvedParams.id,
       { status: body.status, updatedAt: Date.now() },
       { new: true }
     );

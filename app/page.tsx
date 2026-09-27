@@ -11,7 +11,7 @@ import { Product } from "@/lib/models";
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  let dynamicProduct = null;
+  let dynamicProduct: any = null;
   let connectionError = false;
   
   try {
