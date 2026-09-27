@@ -5,8 +5,6 @@ import ProductShowcase from "@/components/ProductShowcase";
 import ShippingReturns from "@/components/ShippingReturns";
 import Reviews from "@/components/Reviews";
 import Newsletter from "@/components/Newsletter";
-import connectToDatabase from "@/lib/mongoose";
-import { Product } from "@/lib/models";
 
 export const dynamic = 'force-dynamic';
 
@@ -15,10 +13,11 @@ export default async function Home() {
   let connectionError = false;
   
   try {
-    await connectToDatabase();
-    
-    // Fetch the latest product from the database
-    const dbProduct = await Product.findOne().sort({ createdAt: -1 });
+    // Fetch the latest product from the backend API
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`, { cache: 'no-store' });
+    if (!res.ok) throw new Error("Failed to fetch");
+    const products = await res.json();
+    const dbProduct = products.length > 0 ? products[0] : null;
     
     if (dbProduct) {
       let currentPrice = dbProduct.price;

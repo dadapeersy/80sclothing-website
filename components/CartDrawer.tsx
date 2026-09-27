@@ -90,7 +90,7 @@ export default function CartDrawer() {
     setIsProcessing(true);
     try {
       // 1. Create order on backend
-      const res = await fetch("/api/create-order", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: finalTotal }),
@@ -109,7 +109,7 @@ export default function CartDrawer() {
         order_id: data.orderId,
         handler: async function (response: any) {
           // 3. Verify Payment and Save to Database
-          const verifyRes = await fetch("/api/verify-payment", {
+          const verifyRes = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/verify-payment`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
