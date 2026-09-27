@@ -24,11 +24,10 @@ export default function Footer() {
           <div className="col-span-1">
             <h4 className="font-semibold tracking-wide mb-6 text-sm">HELP</h4>
             <ul className="space-y-4 text-sm text-muted">
-              <li><Link href="/contact" className="hover:text-black transition-colors">Contact</Link></li>
-              <li><Link href="/shipping-policy" className="hover:text-black transition-colors">Shipping</Link></li>
-              <li><Link href="/refund-policy" className="hover:text-black transition-colors">Returns</Link></li>
-              <li><Link href="#" className="hover:text-black transition-colors">Size Guide</Link></li>
-              <li><Link href="#" className="hover:text-black transition-colors">FAQ</Link></li>
+              <li><Link href="/#info" className="hover:text-black transition-colors">Product Info</Link></li>
+              <li><Link href="/#showcase" className="hover:text-black transition-colors">Showcase Gallery</Link></li>
+              <li><Link href="/#faq" className="hover:text-black transition-colors">FAQ</Link></li>
+              <li><Link href="/#reviews" className="hover:text-black transition-colors">Customer Reviews</Link></li>
             </ul>
           </div>
 
@@ -38,10 +37,15 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-muted">
               <li><Link href="/privacy-policy" className="hover:text-black transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms" className="hover:text-black transition-colors">Terms & Conditions</Link></li>
-              <li><Link href="/refund-policy" className="hover:text-black transition-colors">Refund Policy</Link></li>
+              <li><Link href="/refund-policy" className="hover:text-black transition-colors">Sales Policy</Link></li>
               <li><Link href="/shipping-policy" className="hover:text-black transition-colors">Shipping Policy</Link></li>
             </ul>
           </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between text-xs sm:text-sm text-muted">
+          <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
         </div>
 
       </div>

@@ -11,19 +11,19 @@ export const product = {
   features: [
     {
       title: "LIGHTWEIGHT",
-      description: "Easy everyday layering."
+      description: "Nylon Taslan keeps the jacket light and easy to layer."
     },
     {
-      title: "RETRO DESIGN",
-      description: "Bold color-block styling."
+      title: "DURABLE FABRIC",
+      description: "Built for everyday wear with a strong, resilient weave."
     },
     {
-      title: "EVERYDAY FIT",
-      description: "Designed for casual wear."
+      title: "COMFORTABLE FEEL",
+      description: "Smooth, lightweight construction for comfortable movement."
     },
     {
-      title: "VERSATILE STYLE",
-      description: "Works across casual and streetwear looks."
+      title: "STREETWEAR READY",
+      description: "A textured finish that complements retro and casual styles."
     }
   ],
   detailsList: [

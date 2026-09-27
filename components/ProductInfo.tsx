@@ -2,7 +2,7 @@ import { product } from "@/lib/product-data";
 
 export default function ProductInfo() {
   return (
-    <section className="py-12 md:py-16 bg-background">
+    <section id="info" className="py-12 md:py-16 bg-background scroll-mt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-24 items-start">
           

@@ -4,26 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useShop } from "@/context/ShopContext";
-import { product } from "@/lib/product-data";
 import { cn } from "@/lib/utils";
 
-export default function HeroProduct() {
+export default function HeroProduct({ product }: { product: any }) {
   const [selectedSize, setSelectedSize] = useState<string>("M");
-  const [isAdding, setIsAdding] = useState(false);
   const { addToCart, setIsCartOpen } = useShop();
-
-  const handleAddToCart = () => {
-    setIsAdding(true);
-    addToCart({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      size: selectedSize,
-      quantity: 1,
-      image: product.images[0].src,
-    });
-    setTimeout(() => setIsAdding(false), 500);
-  };
 
   return (
     <section className="relative bg-background">
@@ -70,11 +55,13 @@ export default function HeroProduct() {
                   NEW ARRIVAL
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-black tracking-tighter leading-none mb-3 md:mb-4 uppercase">
-                  THE RETRO<br />COLOR-BLOCK JACKET
+                  {product.name}
                 </h1>
                 <p className="text-sm md:text-base text-muted mb-4 md:mb-5 leading-relaxed lg:max-w-md">
                   {product.description}
                 </p>
+
+
 
                 <div className="flex items-center gap-2 md:gap-3 mb-5 md:mb-6">
                   <span className="text-lg md:text-xl font-semibold tracking-tight">₹{product.price.toLocaleString('en-IN')}</span>
@@ -87,9 +74,6 @@ export default function HeroProduct() {
                 <div className="mb-6 md:mb-8 lg:max-w-md">
                   <div className="flex justify-between items-center mb-2 md:mb-3">
                     <span className="text-xs font-semibold tracking-wide">SIZE</span>
-                    <button className="text-[11px] sm:text-xs text-muted underline underline-offset-4 hover:text-black transition-colors">
-                      Size Guide
-                    </button>
                   </div>
                   <div className="grid grid-cols-5 gap-2">
                     {product.sizes.map((size) => (
@@ -110,14 +94,7 @@ export default function HeroProduct() {
                 </div>
 
                 {/* Actions */}
-                <div className="flex flex-col gap-2.5 md:gap-3 mb-4 lg:max-w-md">
-                  <button
-                    onClick={handleAddToCart}
-                    disabled={isAdding}
-                    className="w-full py-3 md:py-3.5 bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-black/90 transition-colors flex justify-center items-center rounded-sm"
-                  >
-                    {isAdding ? "ADDING..." : "ADD TO BAG"}
-                  </button>
+                <div className="flex flex-col gap-2.5 md:gap-3 mb-4 lg:max-w-md mt-6">
                   <button
                     onClick={() => {
                       addToCart({
@@ -130,7 +107,7 @@ export default function HeroProduct() {
                       });
                       setIsCartOpen(true);
                     }}
-                    className="w-full py-3 md:py-3.5 bg-transparent border border-black text-black text-sm font-semibold tracking-widest uppercase hover:bg-black/5 transition-colors rounded-sm"
+                    className="w-full py-3 md:py-3.5 bg-black text-white text-sm font-semibold tracking-widest uppercase hover:bg-black/90 transition-colors flex justify-center items-center rounded-sm"
                   >
                     BUY IT NOW
                   </button>

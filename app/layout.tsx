@@ -13,6 +13,8 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+import StoreLayoutWrapper from "@/components/StoreLayoutWrapper";
+
 export const metadata: Metadata = {
   title: `${siteConfig.name} | Premium Streetwear`,
   description: siteConfig.description,
@@ -20,15 +22,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col relative">
-        <ShopProvider>
-          <AnnouncementBar />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <CartDrawer />
-        </ShopProvider>
+    <html lang="en" className={`${inter.variable} h-full antialiased scroll-smooth`}>
+      <body className="min-h-full flex flex-col relative bg-gray-50/30">
+        <StoreLayoutWrapper>{children}</StoreLayoutWrapper>
       </body>
     </html>
   );

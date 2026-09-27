@@ -5,7 +5,7 @@ export default function Reviews() {
   const reviews: any[] = [];
   
   return (
-    <section className="py-12 md:py-16 bg-background">
+    <section id="reviews" className="py-12 md:py-16 bg-background scroll-mt-10">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col items-center text-center mb-10 md:mb-16">
