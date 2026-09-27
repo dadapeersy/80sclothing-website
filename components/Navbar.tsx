@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Search, User, Heart, ShoppingBag, Menu, X } from "lucide-react";
+import Image from "next/image";
+import { Search, User, Heart, ShoppingBag } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
 import { siteConfig } from "@/lib/product-data";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { setIsCartOpen, cartCount } = useShop();
 
   useEffect(() => {
@@ -32,24 +32,18 @@ export default function Navbar() {
 
           {/* Mobile Menu Button & Desktop Left Empty Space */}
           <div className="flex-1 flex md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="p-2 -ml-2"
-              aria-label="Open menu"
-            >
-              <Menu size={24} />
-            </button>
+            {/* Hamburger menu removed as requested */}
           </div>
           <div className="hidden md:flex flex-1">
-            <Link href="/" className="text-xl font-bold tracking-tighter">
-              {siteConfig.name}
+            <Link href="/" className="flex items-center">
+              <Image src="/torocavallo_logo.png" alt={siteConfig.name} width={150} height={40} className="object-contain" priority />
             </Link>
           </div>
 
           {/* Center Logo Mobile / Navigation Desktop */}
           <div className="flex-1 flex justify-center">
-            <Link href="/" className="md:hidden text-xl font-bold tracking-tighter">
-              {siteConfig.name}
+            <Link href="/" className="md:hidden flex items-center">
+              <Image src="/torocavallo_logo.png" alt={siteConfig.name} width={120} height={32} className="object-contain" priority />
             </Link>
             <div className="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
               {/* Links removed as requested */}
@@ -74,23 +68,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-background flex flex-col">
-          <div className="px-4 py-5 flex justify-between items-center border-b border-border">
-            <Link href="/" className="text-xl font-bold tracking-tighter" onClick={() => setIsMobileMenuOpen(false)}>
-              {siteConfig.name}
-            </Link>
-            <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 -mr-2">
-              <X size={24} />
-            </button>
-          </div>
-          <div className="flex flex-col p-6 space-y-6 text-lg font-medium tracking-wide">
-            {/* Links removed as requested */}
-          </div>
-          {/* Bottom mobile menu area removed as requested */}
-        </div>
-      )}
     </>
   );
 }

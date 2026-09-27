@@ -21,10 +21,12 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gray-100">
+    <section className="py-24 border-t border-neutral-200 bg-[var(--background)]">
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tighter uppercase mb-3 md:mb-4">STAY IN THE LOOP</h2>
-        <p className="text-base text-muted mb-8 md:mb-10 max-w-md mx-auto leading-relaxed">
+        <h2 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase mb-6 text-neutral-900">
+          STAY IN THE LOOP
+        </h2>
+        <p className="text-lg text-neutral-600 mb-10 max-w-md mx-auto leading-relaxed">
           Get updates on new drops, exclusive releases and offers.
         </p>
         
@@ -34,22 +36,22 @@ export default function Newsletter() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="w-full bg-transparent border-b border-black py-4 pl-0 pr-12 focus:outline-none focus:border-black placeholder:text-muted/60 transition-colors rounded-none"
+            className="w-full bg-transparent border-b-2 border-neutral-900 py-4 pl-0 pr-12 focus:outline-none focus:border-[var(--neon-pink)] placeholder:text-neutral-400 transition-colors rounded-none text-neutral-900 font-medium"
             required
             disabled={status === "loading" || status === "success"}
           />
           <button 
             type="submit"
             disabled={status === "loading" || status === "success"}
-            className="absolute right-0 top-1/2 -translate-y-1/2 p-2 hover:opacity-70 transition-opacity disabled:opacity-50"
+            className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-neutral-900 hover:text-[var(--neon-pink)] transition-colors disabled:opacity-50"
             aria-label="Subscribe"
           >
-            <ArrowRight size={20} />
+            <ArrowRight size={24} strokeWidth={2} />
           </button>
         </form>
         
         {status === "success" && (
-          <p className="mt-4 text-sm font-medium text-green-700">
+          <p className="mt-6 text-sm font-bold text-[var(--neon-cyan)] uppercase tracking-widest">
             Thank you for subscribing!
           </p>
         )}

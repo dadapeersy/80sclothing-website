@@ -16,7 +16,7 @@ export default function Reviews() {
             ))}
           </div>
           <p className="text-muted text-sm font-semibold uppercase tracking-wider mb-6">0 Reviews</p>
-          <button className="px-6 md:px-8 py-3 bg-transparent border border-black text-black text-sm font-semibold tracking-wide hover:bg-black hover:text-white transition-colors rounded-sm">
+          <button className="px-6 md:px-8 py-3 bg-transparent border border-[var(--neon-cyan)] text-[var(--neon-cyan)] text-sm font-semibold tracking-wide hover:bg-[var(--neon-cyan)] hover:text-[var(--bg)] transition-colors rounded-sm shadow-[0_0_8px_rgba(0,229,255,0.3)] hover:shadow-[0_0_12px_rgba(0,229,255,0.6)]">
             WRITE A REVIEW
           </button>
         </div>

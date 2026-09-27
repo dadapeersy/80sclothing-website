@@ -53,9 +53,9 @@ export default function ShippingReturns() {
               >
                 <span className="font-semibold tracking-wide text-sm pr-4">{item.title}</span>
                 {openIndex === i ? (
-                  <Minus size={18} strokeWidth={1.5} />
+                  <Minus size={18} strokeWidth={1.5} className="text-[var(--neon-amber)]" />
                 ) : (
-                  <Plus size={18} strokeWidth={1.5} />
+                  <Plus size={18} strokeWidth={1.5} className="text-[var(--neon-amber)]" />
                 )}
               </button>
               <AnimatePresence>

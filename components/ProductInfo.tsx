@@ -22,7 +22,7 @@ export default function ProductInfo() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-3 md:gap-y-4">
               {product.detailsList.map((detail, i) => (
                 <div key={i} className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-black flex-shrink-0" />
+                  <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[9px] border-b-[var(--neon-cyan)] flex-shrink-0" />
                   <span className="text-sm font-semibold tracking-wide">{detail}</span>
                 </div>
               ))}

@@ -1,16 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #faf9f6; /* Warm off-white */
-  --color-foreground: #111111; /* Near black */
+  --color-background: #F3F0E9;
+  --color-foreground: #1A1917;
   --color-muted: #888888;
   --color-border: #e5e5e5;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  --background: #faf9f6;
-  --foreground: #111111;
+  --bg: #F3F0E9; /* Warm cream/paper */
+  --ink: #1A1917; /* Near-black */
+  --neon-pink: #FF2D95;
+  --neon-cyan: #00E5FF;
+  --neon-purple: #9D00FF;
+  --neon-amber: #FF6B35;
+  
+  --background: var(--bg);
+  --foreground: var(--ink);
 }
 
 body {
@@ -22,8 +29,32 @@ body {
 }
 
 ::selection {
-  background-color: #111111;
-  color: #faf9f6;
+  background-color: var(--neon-pink);
+  color: var(--bg);
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.scanlines {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.05) 50%,
+    rgba(0, 0, 0, 0.05)
+  );
+  background-size: 100% 4px;
+}
+
+.chrome-text {
+  background: linear-gradient(to bottom, #ffffff 0%, #00E5FF 40%, #00E5FF 45%, #FF2D95 55%, #FF2D95 60%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px rgba(255, 45, 149, 0.6));
 }
 
 /* Hide scrollbar for gallery but keep functionality */

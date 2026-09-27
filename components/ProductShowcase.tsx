@@ -52,15 +52,22 @@ export default function ProductShowcase({ product }: ProductShowcaseProps) {
   ];
 
   return (
-    // The section is 300vh tall. You scroll vertically, but the content sticks and moves horizontally!
-    <section id="showcase" ref={containerRef} className="relative h-[300vh] bg-neutral-50 scroll-mt-10">
-      
-      {/* Sticky container locks to the screen */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
-        
+    // The section is 200vh tall. You scroll vertically, but the content sticks and moves horizontally!
+    <section id="showcase" ref={containerRef} className="relative h-[200vh] bg-[var(--background)] scroll-mt-10">
+
+      {/* Sticky container locks below the navbar */}
+      <div className="sticky top-[80px] h-[calc(100vh-80px)] w-full overflow-hidden flex items-center">
+        {/* Subtle Scanlines Overlay */}
+        <div className="absolute inset-0 scanlines pointer-events-none z-10 opacity-60 mix-blend-multiply" />
+
+        {/* Old TV Sticker - Persistent foreground element across all 3 slides */}
+        <div className="hidden lg:block absolute -top-[10px] lg:-top-[20px] right-0 lg:right-[2vw] w-64 lg:w-96 h-64 lg:h-96 pointer-events-none z-30 drop-shadow-2xl -rotate-6">
+          <Image src="/old_tv.png" alt="" aria-hidden="true" fill sizes="(max-width: 1024px) 256px, 384px" className="object-contain" />
+        </div>
+
         {/* The extremely wide flex row that pans left as you scroll down */}
-        <motion.div style={{ x }} className="flex w-[300vw] h-full items-center">
-          
+        <motion.div style={{ x }} className="flex w-[300vw] h-full items-center relative">
+
           {/* ---------------- SLIDE 1 ---------------- */}
           <div className="w-[100vw] h-full flex items-center justify-center shrink-0">
             <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,11 +81,11 @@ export default function ProductShowcase({ product }: ProductShowcaseProps) {
                 {/* Text */}
                 <div className="w-full lg:w-[50%]">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="h-px w-6 bg-blue-600" aria-hidden="true" />
+                    <div className="h-px w-6 bg-[var(--neon-pink)]" aria-hidden="true" />
                     <span className="text-sm font-medium text-neutral-600 tracking-wide">Featured release</span>
                   </div>
                   <h2 className={`${displayFont.className} text-5xl lg:text-7xl font-bold tracking-tight mb-8 text-neutral-900 leading-[1.05] uppercase`}>
-                    Form and <br/> Function
+                    Form and <br /> Function
                   </h2>
                 </div>
               </div>
@@ -98,11 +105,11 @@ export default function ProductShowcase({ product }: ProductShowcaseProps) {
                 {/* Text */}
                 <div className="w-full lg:w-[50%]">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="h-px w-6 bg-blue-600" aria-hidden="true" />
+                    <div className="h-px w-6 bg-[var(--neon-pink)]" aria-hidden="true" />
                     <span className="text-sm font-medium text-neutral-600 tracking-wide">Premium Build</span>
                   </div>
                   <h2 className={`${displayFont.className} text-5xl lg:text-7xl font-bold tracking-tight mb-8 text-neutral-900 leading-[1.05] uppercase`}>
-                    Every Detail <br/> Matters
+                    Every Detail <br /> Matters
                   </h2>
                 </div>
               </div>
@@ -120,16 +127,16 @@ export default function ProductShowcase({ product }: ProductShowcaseProps) {
                   </div>
                 </div>
                 {/* Text */}
-                <div className="w-full lg:w-[50%]">
+                <div className="w-full lg:w-[50%] lg:pr-60 lg:-translate-x-20">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="h-px w-6 bg-blue-600" aria-hidden="true" />
+                    <div className="h-px w-6 bg-[var(--neon-pink)]" aria-hidden="true" />
                     <span className="text-sm font-medium text-neutral-600 tracking-wide">Built to Last</span>
                   </div>
                   <p className="text-neutral-600 text-base lg:text-lg leading-relaxed mb-10 max-w-md">
                     Constructed with durable materials and precise tailoring. {product?.name ? `${product.name} provides` : 'This piece provides'} reliable structure and an adjustable fit suited for daily wear in urban environments.
                   </p>
                   <div>
-                    <button className="px-6 py-3.5 bg-black text-white text-sm font-medium hover:bg-neutral-800 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 flex items-center gap-2">
+                    <button className="px-6 py-3.5 bg-black text-white text-sm font-medium hover:bg-[var(--neon-pink)] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 flex items-center gap-2 relative z-20">
                       View product details
                       <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M5 12h14"></path>

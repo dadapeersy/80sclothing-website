@@ -5,6 +5,7 @@ import ProductShowcase from "@/components/ProductShowcase";
 import ShippingReturns from "@/components/ShippingReturns";
 import Reviews from "@/components/Reviews";
 import Newsletter from "@/components/Newsletter";
+import RetroSticker from "@/components/RetroSticker";
 
 export const dynamic = 'force-dynamic';
 
@@ -55,9 +56,12 @@ export default async function Home() {
         </div>
       )}
       <ProductInfo />
+      <RetroSticker src="/casseette.png" rotation={-6} align="left" yOffsetEnd={60} />
       <ProductFeatures />
       {dynamicProduct && <ProductShowcase product={dynamicProduct} />}
+      <RetroSticker src="/radio.png" rotation={-4} align="left" yOffsetEnd={75} />
       <ShippingReturns />
+      <RetroSticker src="/camera.png" rotation={8} align="right" yOffsetEnd={50} />
       <Reviews />
       <Newsletter />
     </div>
