@@ -1,7 +1,6 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import AnnouncementBar from '@/components/AnnouncementBar';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
@@ -19,7 +18,6 @@ export default function StoreLayoutWrapper({ children }: { children: React.React
   // Otherwise, render the full store layout
   return (
     <ShopProvider>
-      <AnnouncementBar />
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />

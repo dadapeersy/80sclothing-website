@@ -3,9 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Search, User, Heart, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
-import { siteConfig } from "@/lib/product-data";
 import { cn } from "@/lib/utils";
 
 export default function Navbar() {
@@ -24,50 +23,53 @@ export default function Navbar() {
     <>
       <nav
         className={cn(
-          "sticky top-0 z-40 w-full transition-all duration-300",
-          isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border/50 py-3" : "bg-transparent py-5"
+          "sticky top-0 z-40 w-full transition-all duration-300 border-b-4 border-double border-[var(--border)]",
+          isScrolled ? "bg-[var(--background)]/90 backdrop-blur-md py-3 shadow-md" : "bg-[var(--background)] py-4"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
 
-          {/* Mobile Menu Button & Desktop Left Empty Space */}
-          <div className="flex-1 flex md:hidden">
-            {/* Hamburger menu removed as requested */}
-          </div>
-          <div className="hidden md:flex flex-1">
-            <Link href="/" className="flex items-center">
-              <Image src="/torocavallo_logo.png" alt={siteConfig.name} width={150} height={40} className="object-contain" priority />
+          {/* Brand Logo */}
+          <div className="flex-1 flex items-center">
+            <Link href="/" className="flex items-center gap-3 group transition-transform hover:scale-[1.02] active:scale-[0.98]">
+              <Image
+                src="/torocavallo_logo.png"
+                alt="Brand Logo"
+                width={160}
+                height={45}
+                className="object-contain"
+                priority
+              />
             </Link>
           </div>
 
-          {/* Center Logo Mobile / Navigation Desktop */}
-          <div className="flex-1 flex justify-center">
-            <Link href="/" className="md:hidden flex items-center">
-              <Image src="/torocavallo_logo.png" alt={siteConfig.name} width={120} height={32} className="object-contain" priority />
-            </Link>
-            <div className="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
-              {/* Links removed as requested */}
+          {/* Navigation Links Removed as Requested */}
+          <div className="hidden lg:flex flex-1 justify-center space-x-8 text-sm font-bold tracking-widest uppercase text-[var(--ink)]">
+            {/* Empty center spacing */}
+          </div>
+
+          {/* Hotline & Cart */}
+          <div className="flex-1 flex justify-end items-center gap-4 md:gap-6">
+            <div className="hidden md:block text-right font-mono text-[10px] md:text-[11px] text-[var(--ink)] leading-tight border-r-2 border-[var(--border)] pr-4">
+              <span className="opacity-80">CATALOG HOTLINE:</span>
+              <b className="block text-xs font-bold text-[var(--neon-pink)]">1-800-80S-JACKET</b>
             </div>
-          </div>
 
-          {/* Right Icons */}
-          <div className="flex-1 flex justify-end items-center space-x-4 md:space-x-6">
+
             <button
-              className="relative hover:opacity-60 transition-opacity"
+              className="flex items-center gap-2 px-4 py-2 bg-[var(--ink)] text-[var(--background)] font-bold text-xs uppercase tracking-wider transition-all hover:bg-[var(--neon-pink)] active:scale-95 halftone-border-sm"
               aria-label="Cart"
               onClick={() => setIsCartOpen(true)}
             >
-              <ShoppingBag size={20} strokeWidth={1.5} />
-              {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-black text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
-                  {cartCount}
-                </span>
-              )}
+              <ShoppingBag size={16} strokeWidth={2} />
+              <span className="hidden sm:inline">Bag</span>
+              <span className="w-5 h-5 bg-[var(--neon-cyan)] text-[var(--ink)] rounded-full flex items-center justify-center text-[10px] font-black border border-[var(--ink)]">
+                {cartCount}
+              </span>
             </button>
           </div>
         </div>
       </nav>
-
     </>
   );
 }

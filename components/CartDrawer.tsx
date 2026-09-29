@@ -32,6 +32,12 @@ export default function CartDrawer() {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
+
+    // Auto-login: Prefill email if they have purchased before
+    const savedEmail = localStorage.getItem('customerEmail');
+    if (savedEmail) {
+      setFormData(prev => ({ ...prev, email: savedEmail }));
+    }
   }, []);
   
   const discount = cartTotal >= 2000 ? 1000 : 0;
@@ -133,6 +139,9 @@ export default function CartDrawer() {
           });
           const verifyData = await verifyRes.json();
           if (verifyData.success) {
+            // Save email for auto-login / order history
+            localStorage.setItem('customerEmail', formData.email);
+            
             setIsCartOpen(false);
             setOrderSuccess(true);
           } else {
