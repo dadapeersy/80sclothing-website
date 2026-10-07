@@ -61,8 +61,8 @@ export default function ProductShowcase({ product }: ProductShowcaseProps) {
         <div className="absolute inset-0 scanlines pointer-events-none z-10 opacity-60 mix-blend-multiply" />
 
         {/* Old TV Sticker - Persistent foreground element across all 3 slides */}
-        <div className="hidden lg:block absolute -top-[10px] lg:-top-[20px] right-0 lg:right-[2vw] w-64 lg:w-96 h-64 lg:h-96 pointer-events-none z-30 drop-shadow-2xl -rotate-6">
-          <Image src="/old_tv.png" alt="" aria-hidden="true" fill sizes="(max-width: 1024px) 256px, 384px" className="object-contain" />
+        <div className="absolute -top-[10px] lg:-top-[20px] right-0 lg:right-[2vw] w-48 sm:w-64 lg:w-96 h-48 sm:h-64 lg:h-96 pointer-events-none z-30 drop-shadow-2xl -rotate-6">
+          <Image src="/old_tv.png" alt="" aria-hidden="true" fill sizes="(max-width: 1024px) 192px, 384px" className="object-contain" />
         </div>
 
         {/* The extremely wide flex row that pans left as you scroll down */}
@@ -71,10 +71,10 @@ export default function ProductShowcase({ product }: ProductShowcaseProps) {
           {/* ---------------- SLIDE 1 ---------------- */}
           <div className="w-[100vw] h-full flex items-center justify-center shrink-0">
             <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
+              <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
                 {/* Image */}
                 <div className="w-full lg:w-[50%] flex justify-center">
-                  <div className="relative w-[70%] sm:w-[60%] md:w-[55%] lg:w-[65%] aspect-[3/4] overflow-hidden shadow-xl border border-neutral-200 bg-white">
+                  <div className="relative w-[55%] sm:w-[50%] md:w-[45%] lg:w-[65%] aspect-[3/4] overflow-hidden shadow-xl border border-neutral-200 bg-white">
                     <Image src={displayImages[0].src} alt={displayImages[0].alt || "Product view 1"} fill priority className="object-cover" />
                   </div>
                 </div>
@@ -95,10 +95,10 @@ export default function ProductShowcase({ product }: ProductShowcaseProps) {
           {/* ---------------- SLIDE 2 ---------------- */}
           <div className="w-[100vw] h-full flex items-center justify-center shrink-0">
             <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
+              <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
                 {/* Image */}
                 <div className="w-full lg:w-[50%] flex justify-center">
-                  <div className="relative w-[70%] sm:w-[60%] md:w-[55%] lg:w-[65%] aspect-[3/4] overflow-hidden shadow-xl border border-neutral-200 bg-white">
+                  <div className="relative w-[55%] sm:w-[50%] md:w-[45%] lg:w-[65%] aspect-[3/4] overflow-hidden shadow-xl border border-neutral-200 bg-white">
                     <Image src={displayImages[1].src} alt={displayImages[1].alt || "Product view 2"} fill className="object-cover" />
                   </div>
                 </div>
@@ -119,10 +119,10 @@ export default function ProductShowcase({ product }: ProductShowcaseProps) {
           {/* ---------------- SLIDE 3 ---------------- */}
           <div className="w-[100vw] h-full flex items-center justify-center shrink-0">
             <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
+              <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
                 {/* Image */}
                 <div className="w-full lg:w-[50%] flex justify-center">
-                  <div className="relative w-[70%] sm:w-[60%] md:w-[55%] lg:w-[65%] aspect-[3/4] overflow-hidden shadow-xl border border-neutral-200 bg-white">
+                  <div className="relative w-[55%] sm:w-[50%] md:w-[45%] lg:w-[65%] aspect-[3/4] overflow-hidden shadow-xl border border-neutral-200 bg-white">
                     <Image src={displayImages[2].src} alt={displayImages[2].alt || "Product view 3"} fill className="object-cover" />
                   </div>
                 </div>

@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Tag } from "lucide-react";
+import { ArrowRight, Tag, Scissors } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { useShop } from "@/context/ShopContext";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -10,8 +12,12 @@ export default function Newsletter() {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
+  const { isDiscountUnlocked, setIsDiscountUnlocked, discountPercentage } = useShop();
+
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  
+  const isTorn = isDiscountUnlocked;
 
   const handleTicketMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -50,14 +56,14 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="py-16 md:py-24 border-t-[3px] border-double border-[var(--border)] bg-[var(--background)]">
+    <section className="pt-4 pb-8 md:pt-12 md:pb-24 border-t-[3px] border-double border-[var(--border)] bg-[var(--background)]">
       <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
 
         {/* =========================
             3D TICKET
         ========================== */}
         <div
-          className="w-full max-w-[1400px] mx-auto mb-10"
+          className="w-full max-w-[1000px] mx-auto mb-6 md:mb-10 px-0 md:px-6 lg:px-8"
           style={{
             perspective: "1400px",
           }}
@@ -92,32 +98,83 @@ export default function Newsletter() {
               }}
             />
 
-            {/* Ticket */}
+            {/* Ticket Content */}
             <div
-              className="relative overflow-hidden"
-              style={{
-                transformStyle: "preserve-3d",
-              }}
+              className="relative w-full flex items-center justify-center overflow-hidden"
+              style={{ transformStyle: "preserve-3d" }}
             >
-              <Image
-                src="/ticket_section.png"
-                alt="80's Jacket Collection Ticket"
-                width={1600}
-                height={600}
-                className="w-full h-auto object-contain select-none"
-                priority
-              />
+              {!isTorn ? (
+                <>
+                  <Image
+                    src="/ticket_section.png"
+                    alt="80's Jacket Collection Ticket"
+                    width={1600}
+                    height={600}
+                    className="w-full h-auto object-contain select-none"
+                    priority
+                    draggable={false}
+                  />
 
-              {/* Subtle glossy highlight */}
-              <div
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
-                style={{
-                  opacity: isHovering ? 0.18 : 0,
-                  background:
-                    "linear-gradient(115deg, transparent 25%, rgba(255,255,255,0.8) 45%, transparent 65%)",
-                  transform: "translateZ(20px)",
-                }}
-              />
+                  {/* Swipe Zone Over the Dotted Line (approx 75% from left) */}
+                  <motion.div
+                    className="absolute top-0 bottom-0 left-[65%] right-[15%] z-30 flex items-center justify-center cursor-grab active:cursor-grabbing touch-none"
+                    onPan={(e, info) => {
+                      if (Math.abs(info.offset.y) > 40 || Math.abs(info.offset.x) > 40) {
+                        setIsDiscountUnlocked(true);
+                        setIsHovering(false);
+                        setRotation({ x: 0, y: 0 });
+                      }
+                    }}
+                  />
+
+                  {/* Subtle glossy highlight */}
+                  <div
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
+                    style={{
+                      opacity: isHovering ? 0.18 : 0,
+                      background:
+                        "linear-gradient(115deg, transparent 25%, rgba(255,255,255,0.8) 45%, transparent 65%)",
+                      transform: "translateZ(20px)",
+                    }}
+                  />
+                </>
+              ) : (
+                <div className="relative w-full flex flex-row items-center justify-center gap-1 md:gap-2 py-4">
+                  {/* Left Half */}
+                  <motion.div
+                    initial={{ x: 0, y: 0, rotate: 0 }}
+                    animate={{ x: -2, y: 2, rotate: -2 }}
+                    transition={{ type: "spring", damping: 15, stiffness: 100 }}
+                    className="relative w-[70%]"
+                  >
+                    <Image
+                      src="/ticket_1st_half.png"
+                      alt="Ticket Left Half"
+                      width={1120}
+                      height={600}
+                      className="w-full h-auto object-contain"
+                      priority
+                    />
+                  </motion.div>
+                  
+                  {/* Right Half */}
+                  <motion.div
+                    initial={{ x: 0, y: 0, rotate: 0 }}
+                    animate={{ x: 2, y: -2, rotate: 3 }}
+                    transition={{ type: "spring", damping: 12, stiffness: 90 }}
+                    className="relative w-[28%]"
+                  >
+                    <Image
+                      src="/ticket_2nd_half.png"
+                      alt="Ticket Right Half"
+                      width={448}
+                      height={600}
+                      className="w-full h-auto object-contain"
+                      priority
+                    />
+                  </motion.div>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -20,6 +20,9 @@ type ShopContextType = {
   setIsCartOpen: (isOpen: boolean) => void;
   cartTotal: number;
   cartCount: number;
+  isDiscountUnlocked: boolean;
+  setIsDiscountUnlocked: (unlocked: boolean) => void;
+  discountPercentage: number;
 };
 
 const ShopContext = createContext<ShopContextType | undefined>(undefined);
@@ -27,6 +30,8 @@ const ShopContext = createContext<ShopContextType | undefined>(undefined);
 export function ShopProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isDiscountUnlocked, setIsDiscountUnlocked] = useState(false);
+  const [discountPercentage, setDiscountPercentage] = useState(20);
 
   // Optional: Load from localStorage on mount
   useEffect(() => {
@@ -38,12 +43,37 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
         console.error("Failed to parse cart", e);
       }
     }
+    const savedDiscount = localStorage.getItem("retro_discount");
+    if (savedDiscount === "true") {
+      setIsDiscountUnlocked(true);
+    }
+
+    // Fetch dynamic discount percentage from backend
+    const fetchSettings = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/settings`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.ticketDiscountPercentage !== undefined) {
+            setDiscountPercentage(data.ticketDiscountPercentage);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch settings", error);
+      }
+    };
+    fetchSettings();
   }, []);
 
   // Save to localStorage when cart changes
   useEffect(() => {
     localStorage.setItem("retro_cart", JSON.stringify(cart));
   }, [cart]);
+
+  // Save discount to localStorage
+  useEffect(() => {
+    localStorage.setItem("retro_discount", isDiscountUnlocked.toString());
+  }, [isDiscountUnlocked]);
 
   const addToCart = (item: CartItem) => {
     setCart((prev) => {
@@ -85,6 +115,9 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
         setIsCartOpen,
         cartTotal,
         cartCount,
+        isDiscountUnlocked,
+        setIsDiscountUnlocked,
+        discountPercentage,
       }}
     >
       {children}

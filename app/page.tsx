@@ -12,23 +12,23 @@ export const dynamic = 'force-dynamic';
 export default async function Home() {
   let dynamicProduct: any = null;
   let connectionError = false;
-  
+
   try {
     // Fetch the latest product from the backend API
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`, { cache: 'no-store' });
     if (!res.ok) throw new Error("Failed to fetch");
     const products = await res.json();
     const dbProduct = products.length > 0 ? products[0] : null;
-    
+
     if (dbProduct) {
       let currentPrice = dbProduct.price;
       let originalPrice = undefined;
-      
+
       if (dbProduct.discountPercentage && dbProduct.discountPercentage > 0) {
         currentPrice = dbProduct.price * (1 - (dbProduct.discountPercentage / 100));
         originalPrice = dbProduct.price;
       }
-      
+
       dynamicProduct = {
         id: dbProduct._id.toString(),
         name: dbProduct.title,

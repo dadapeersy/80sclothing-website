@@ -24,12 +24,12 @@ export default function RetroSticker({ src, rotation, align, yOffsetEnd = 80 }: 
   const y = useTransform(scrollYProgress, [0, 1], [0, prefersReducedMotion ? 0 : yOffsetEnd]);
 
   return (
-    <div ref={ref} className="relative w-full h-0 pointer-events-none z-20">
+    <div ref={ref} className="relative w-full h-8 md:h-0 pointer-events-none z-20">
       <motion.div
         style={{ y }}
-        className={`absolute hidden md:block w-48 lg:w-72 h-48 lg:h-72 pointer-events-none drop-shadow-2xl ${
-          align === "left" ? "left-[5%] lg:left-[10%]" : "right-[5%] lg:right-[10%]"
-        } -translate-y-full`}
+        className={`absolute w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-72 lg:h-72 pointer-events-none drop-shadow-2xl opacity-100 ${
+          align === "left" ? "left-6 sm:left-[5%] lg:left-[10%]" : "right-6 sm:right-[5%] lg:right-[10%]"
+        } -top-32 sm:-top-36 md:top-auto md:-translate-y-full`}
         initial={{ rotate: rotation }}
       >
         <Image 

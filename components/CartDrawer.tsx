@@ -8,7 +8,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export default function CartDrawer() {
-  const { isCartOpen, setIsCartOpen, cart, updateQuantity, removeFromCart, cartTotal } = useShop();
+  const { isCartOpen, setIsCartOpen, cart, updateQuantity, removeFromCart, cartTotal, isDiscountUnlocked, discountPercentage } = useShop();
   const [paymentMethod, setPaymentMethod] = useState("razorpay");
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
@@ -40,7 +40,7 @@ export default function CartDrawer() {
     }
   }, []);
   
-  const discount = cartTotal >= 2000 ? 1000 : 0;
+  const discount = isDiscountUnlocked ? Math.round(cartTotal * (discountPercentage / 100)) : 0;
   const finalTotal = Math.max(0, cartTotal - discount);
 
   const triggerError = (msg: string, field: string) => {
@@ -128,6 +128,8 @@ export default function CartDrawer() {
                 customerPhone: formData.phone,
                 shippingAddress: `${formData.address}, ${formData.apartment ? formData.apartment + ', ' : ''}${formData.city}, ${formData.state} - ${formData.pincode}, India`,
                 totalAmount: finalTotal,
+                discountApplied: isDiscountUnlocked,
+                discountPercentage: discountPercentage,
                 items: cart.map(item => ({
                   productId: item.id,
                   quantity: item.quantity,
@@ -420,7 +422,7 @@ export default function CartDrawer() {
                     </div>
                     {discount > 0 && (
                       <div className="flex justify-between text-sm">
-                        <span className="text-muted">Discount</span>
+                        <span className="text-muted">{isDiscountUnlocked ? `Discounted amount (-${discountPercentage}%)` : 'Discount'}</span>
                         <span className="font-medium text-green-600">- ₹{discount.toLocaleString('en-IN')}</span>
                       </div>
                     )}
